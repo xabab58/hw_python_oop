@@ -84,8 +84,8 @@ class SportsWalking(Training):
 
 class Swimming(Training):
     """Тренировка: плавание."""
-    coeff_calorie_5 = 1.1
-    coeff_calorie_6 = 2.0
+    COEFF_CALORIE_5 = 1.1
+    COEFF_CALORIE_6 = 2.0
     LEN_STEP: float = 1.38
 
     def __init__(self, action: int, duration: float, weight: float,
@@ -103,8 +103,8 @@ class Swimming(Training):
                 / self.duration)
 
     def get_spent_calories(self) -> float:
-        return ((self.get_mean_speed() + self.coeff_calorie_5)
-                * self.coeff_calorie_6 * self.weight)
+        return ((self.get_mean_speed() + self.COEFF_CALORIE_5)
+                * self.COEFF_CALORIE_6 * self.weight)
 
 
 def read_package(workout_type: str, data: list):
@@ -114,8 +114,7 @@ def read_package(workout_type: str, data: list):
         'WLK': SportsWalking,
         'SWM': Swimming,
     }
-    if read.get(workout_type) is None:
-        return None
+
     readdat = read.get(workout_type)(*data)
     return readdat
 
@@ -139,4 +138,3 @@ if __name__ == '__main__':
             print('Неожиданный тип тренировки')
         else:
             main(training)
-        
